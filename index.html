@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Hariharan & Divya Bharathi | Royal Wedding Invitation</title>
+  <meta name="description" content="You are cordially invited to celebrate the royal wedding of Hariharan & Divya Bharathi. Tap to open the invitation.">
+  
+  <!-- Google Fonts: Royal serif & calligraphy fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600;700;800&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="scroll-locked">
+  <!-- Ambient Desktop Background -->
+  <div class="desktop-bg">
+    <div class="ambient-glow"></div>
+    <div class="ambient-stars"></div>
+  </div>
+
+  <!-- Mobile Viewport Container (Strictly Mobile View, No Webview) -->
+  <main class="mobile-viewport" id="mobileApp">
+
+    <!-- ============================================ -->
+    <!-- SECTION 1: VIDEO HERO WITH TAP TO OPEN -->
+    <!-- ============================================ -->
+    <section class="section video-section" id="heroSection">
+      <div class="video-container" id="videoContainer">
+        <!-- The MP4 Video (MUTED as requested - No music/audio) -->
+        <video 
+          id="introVideo" 
+          playsinline 
+          webkit-playsinline 
+          x5-playsinline
+          preload="auto"
+          muted
+          src="assets/wedding_intro.mp4"
+        ></video>
+        
+        <!-- Subtle Top & Bottom Vignettes for Cinema Feel -->
+        <div class="video-top-gradient"></div>
+        <div class="video-bottom-gradient"></div>
+
+        <!-- Initial "Tap To Open" Overlay (Clean text only, no outer seal frame) -->
+        <div class="tap-overlay" id="tapOverlay">
+          <div class="tap-text-trigger" id="tapOpenBtn">
+            <div class="tap-sparkle-top">✦</div>
+            <h1 class="tap-main-text">TAP TO OPEN</h1>
+            <p class="tap-sub-text">ROYAL INVITATION</p>
+            <div class="tap-touch-pill">
+              <span class="touch-ring"></span>
+              <span class="touch-label">Touch Anywhere</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating Scroll Down Prompt (Appears ONLY after video reveals names) -->
+        <div class="scroll-prompt hidden" id="scrollPrompt">
+          <span class="scroll-text">Scroll Down</span>
+          <div class="scroll-arrow-box">
+            <svg class="scroll-arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M7 10l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEAMLESS TRANSITION DIVIDER: Floral garland & gold wave to hide video cutoff -->
+      <div class="seamless-divider">
+        <div class="floral-garland-wrap">
+          <svg class="floral-svg-divider" viewBox="0 0 600 70" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="goldWaveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#996515"/>
+                <stop offset="30%" stop-color="#D4AF37"/>
+                <stop offset="50%" stop-color="#FFF2A3"/>
+                <stop offset="70%" stop-color="#D4AF37"/>
+                <stop offset="100%" stop-color="#996515"/>
+              </linearGradient>
+            </defs>
+            <path d="M0,0 Q150,55 300,25 Q450,55 600,0 L600,70 L0,70 Z" fill="#140407"/>
+            <path d="M0,0 Q150,55 300,25 Q450,55 600,0" fill="none" stroke="url(#goldWaveGrad)" stroke-width="2.5"/>
+          </svg>
+          
+          <!-- Ornate Centerpiece with Diya SVG -->
+          <div class="flower-cluster-band">
+            <div class="flower-motif-svg left">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#D4AF37" stroke-width="1.5">
+                <path d="M12 2C9 7 4 9 4 12c0 4.4 3.6 8 8 8s8-3.6 8-8c0-3-5-5-8-10z" fill="rgba(212,175,55,0.2)"/>
+                <circle cx="12" cy="12" r="3" fill="#D4AF37"/>
+              </svg>
+            </div>
+            
+            <div class="flower-centerpiece">
+              <svg class="diya-flame-svg" viewBox="0 0 24 24" width="22" height="22" fill="none">
+                <path d="M12 2c-.6 2.2-2.2 3.8-2.2 5.8a2.2 2.2 0 0 0 4.4 0C14.2 5.8 12.6 4.2 12 2z" fill="#FFF2A3"/>
+                <path d="M4 14c0 4 3.6 6.5 8 6.5s8-2.5 8-6.5c0-1.5-3.6-2.5-8-2.5S4 12.5 4 14z" fill="#D4AF37"/>
+                <line x1="8" y1="20.5" x2="16" y2="20.5" stroke="#996515" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+
+            <div class="flower-motif-svg right">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#D4AF37" stroke-width="1.5">
+                <path d="M12 2C9 7 4 9 4 12c0 4.4 3.6 8 8 8s8-3.6 8-8c0-3-5-5-8-10z" fill="rgba(212,175,55,0.2)"/>
+                <circle cx="12" cy="12" r="3" fill="#D4AF37"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION 2: ROYAL WEDDING INVITATION CARD -->
+    <!-- ============================================ -->
+    <section class="section invitation-section" id="invitationSection">
+      <div class="royal-card-wrapper">
+        <div class="card-ornate-frame">
+          <div class="corner-ornament top-left"></div>
+          <div class="corner-ornament top-right"></div>
+          <div class="corner-ornament bottom-left"></div>
+          <div class="corner-ornament bottom-right"></div>
+
+          <!-- Auspicious Header -->
+          <div class="auspicious-header">
+            <div class="ganesha-symbol">ॐ</div>
+            <div class="shloka-text">|| श्री गणेशाय नमः ||</div>
+            <div class="subham-badge">Subhamasthu</div>
+          </div>
+
+          <div class="invitation-intro">
+            With the divine blessings of Almighty and our beloved ancestors,<br>
+            we cordially invite you and your family to celebrate the auspicious wedding of
+          </div>
+
+          <!-- Couple Presentation: Hariharan & Divya Bharathi -->
+          <div class="couple-card">
+            <div class="groom-info">
+              <h2 class="couple-name groom">Hariharan</h2>
+              <div class="parents-line">S/o. Smt. & Sri. Parents Name</div>
+            </div>
+
+            <div class="wed-symbol-wrap">
+              <div class="wed-line"></div>
+              <div class="wed-knot">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#D4AF37" stroke-width="2">
+                  <circle cx="8" cy="12" r="5"/>
+                  <circle cx="16" cy="12" r="5"/>
+                </svg>
+                <span class="wed-knot-text">WEDS</span>
+              </div>
+              <div class="wed-line"></div>
+            </div>
+
+            <div class="bride-info">
+              <h2 class="couple-name bride">Divya Bharathi</h2>
+              <div class="parents-line">D/o. Smt. & Sri. Parents Name</div>
+            </div>
+          </div>
+
+          <!-- Romantic Poem / Quote -->
+          <div class="wedding-quote-box">
+            <div class="quote-mark">“</div>
+            <p class="quote-text">
+              Two hearts, two souls, united in love and destined for eternity. As we embark on this sacred journey of togetherness, your presence and blessings will make our moments truly unforgettable.
+            </p>
+            <div class="quote-mark end">”</div>
+          </div>
+
+          <!-- Auspicious Muhurtham Highlight (25.11.2026 matching video) -->
+          <div class="muhurtham-highlight-card">
+            <div class="muhurtham-tag">Auspicious Muhurtham</div>
+            <div class="muhurtham-date">Wednesday, 25th November 2026</div>
+            <div class="muhurtham-time">Subha Muhurtham: 09:15 AM - 10:30 AM</div>
+            <div class="nakshatra-info">(Rohini Nakshatra • Vrishabha Lagnam)</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION 3: INTERACTIVE SCRATCH TO REVEAL -->
+    <!-- ============================================ -->
+    <section class="section scratch-section" id="scratchSection">
+      <div class="section-badge-wrap">
+        <div class="badge-line"></div>
+        <div class="section-badge">
+          <span>SECRET SURPRISE</span>
+        </div>
+        <div class="badge-line"></div>
+      </div>
+
+      <h3 class="scratch-title">Scratch for Blessings</h3>
+      <p class="scratch-subtitle">Rub across the golden card below to reveal our secret wedding wish & blessing!</p>
+
+      <div class="scratch-card-container">
+        <!-- Secret Underneath Content -->
+        <div class="scratch-secret-content" id="scratchSecret">
+          <div class="secret-inner">
+            <div class="secret-stars-svg">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="#FFF2A3">
+                <path d="M12 2l2.4 6.9 6.9 2.4-6.9 2.4L12 20.6l-2.4-6.9L2.7 11.3l6.9-2.4z"/>
+              </svg>
+            </div>
+            <h4 class="secret-heading">"May Your Presence Bless Us!"</h4>
+            <p class="secret-quote">
+              "Love does not consist in gazing at each other, but in looking outward together in the same direction."
+            </p>
+            <div class="secret-special-box">
+              <div class="secret-label">A Special Feast Awaits You!</div>
+              <div class="secret-detail">Join us for the Grand Traditional Wedding Feast</div>
+              <div class="feast-time">11:30 AM Onwards • Kalyana Mandapam</div>
+            </div>
+            <div class="secret-badge">Heartfelt Welcome!</div>
+          </div>
+        </div>
+
+        <!-- Scratch Canvas Overlay -->
+        <canvas id="scratchCanvas" width="340" height="260"></canvas>
+
+        <!-- Scratch Prompt Tooltip with Clean SVG Icon -->
+        <div class="scratch-finger-hint" id="scratchHint">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#FFF2A3" stroke-width="2">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 8v8M8 12h8"/>
+          </svg>
+          <span class="hint-text">Scratch to Reveal</span>
+        </div>
+      </div>
+
+      <!-- Scratch Progress Bar -->
+      <div class="scratch-progress-wrap" id="scratchProgressWrap">
+        <div class="scratch-progress-label">
+          <span>Scratch Progress:</span>
+          <span id="scratchPercent">0%</span>
+        </div>
+        <div class="scratch-bar">
+          <div class="scratch-fill" id="scratchFill"></div>
+        </div>
+        <button class="reveal-all-btn" id="revealAllBtn">Reveal Entire Card</button>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION 4: EVENTS, VENUE & LIVE LOCATION -->
+    <!-- ============================================ -->
+    <section class="section events-location-section" id="locationSection">
+      
+      <!-- Countdown Timer (Target: 25th Nov 2026) -->
+      <div class="countdown-widget">
+        <div class="countdown-title">The Royal Celebration Begins In</div>
+        <div class="countdown-boxes">
+          <div class="count-box">
+            <span class="count-num" id="daysNum">00</span>
+            <span class="count-label">Days</span>
+          </div>
+          <span class="count-colon">:</span>
+          <div class="count-box">
+            <span class="count-num" id="hoursNum">00</span>
+            <span class="count-label">Hours</span>
+          </div>
+          <span class="count-colon">:</span>
+          <div class="count-box">
+            <span class="count-num" id="minsNum">00</span>
+            <span class="count-label">Mins</span>
+          </div>
+          <span class="count-colon">:</span>
+          <div class="count-box">
+            <span class="count-num" id="secsNum">00</span>
+            <span class="count-label">Secs</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wedding Events Itinerary with Clean SVG Icons -->
+      <div class="itinerary-wrapper">
+        <h3 class="events-main-title">Celebration Schedule</h3>
+        
+        <div class="timeline">
+          <!-- Event 1: Reception -->
+          <div class="timeline-item">
+            <div class="timeline-dot">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#D4AF37" stroke-width="1.8">
+                <path d="M12 2c-.5 2-2 3.5-2 5.5a2 2 0 0 0 4 0C14 5.5 12.5 4 12 2z" fill="#FFF2A3"/>
+                <path d="M4 14c0 4.4 3.6 7 8 7s8-2.6 8-7c0-1.5-3.6-2.5-8-2.5S4 12.5 4 14z"/>
+              </svg>
+            </div>
+            <div class="timeline-card">
+              <div class="timeline-badge">Ceremony</div>
+              <h4 class="event-title">Sumangali Prarthanai & Reception</h4>
+              <div class="event-time">Tuesday Evening, 24th Nov • 6:30 PM Onwards</div>
+              <p class="event-desc">An evening of music, warm conversations, blessings, and grand dinner buffet.</p>
+            </div>
+          </div>
+
+          <!-- Event 2: Subha Muhurtham -->
+          <div class="timeline-item highlight">
+            <div class="timeline-dot">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#D4AF37" stroke-width="2">
+                <circle cx="8" cy="12" r="5"/>
+                <circle cx="16" cy="12" r="5"/>
+              </svg>
+            </div>
+            <div class="timeline-card">
+              <div class="timeline-badge gold">Main Wedding</div>
+              <h4 class="event-title">Subha Muhurtham</h4>
+              <div class="event-time">Wednesday Morning, 25th Nov • 9:15 AM - 10:30 AM</div>
+              <p class="event-desc">Sacred Kanyadaanam, Mangalya Dharanam, and Saptapadi amidst sacred Vedic chants.</p>
+            </div>
+          </div>
+
+          <!-- Event 3: Traditional Feast -->
+          <div class="timeline-item">
+            <div class="timeline-dot">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#D4AF37" stroke-width="1.8">
+                <path d="M6 10h12c0 5-2 9-6 9s-6-4-6-9z"/>
+                <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+                <line x1="8" y1="21" x2="16" y2="21" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="timeline-card">
+              <div class="timeline-badge">Traditional Feast</div>
+              <h4 class="event-title">Kalyana Virundhu</h4>
+              <div class="event-time">Wednesday, 25th Nov • 11:30 AM Onwards</div>
+              <p class="event-desc">A lavish royal banana leaf feast with traditional South Indian delicacies.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Venue & Location Details -->
+      <div class="venue-card">
+        <div class="venue-header">
+          <div class="venue-icon-svg">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#D4AF37" stroke-width="1.8">
+              <path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-4a3 3 0 0 1 6 0v4M12 2v3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <div class="venue-subtitle">Marriage Hall & Venue</div>
+            <h3 class="venue-title">Sri Krishna Grand Kalyana Mandapam</h3>
+          </div>
+        </div>
+
+        <div class="venue-address">
+          <p>
+            No. 45, Temple High Road, Near City Central Landmark,<br>
+            Chennai, Tamil Nadu - 600028
+          </p>
+        </div>
+
+        <!-- Embedded Interactive Map -->
+        <div class="map-container">
+          <iframe 
+            title="Wedding Venue Map"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d124414.28822071856!2d80.15343075!3d13.04752545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5265ea4f7d3361%3A0x6e61a70b6863d433!2sChennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+            width="100%" 
+            height="180" 
+            style="border:0; border-radius: 12px;" 
+            allowfullscreen="" 
+            loading="lazy">
+          </iframe>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="venue-actions">
+          <a href="https://maps.google.com/?q=Chennai+Tamil+Nadu" target="_blank" rel="noopener noreferrer" class="action-btn map-btn">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span>Open in Google Maps</span>
+          </a>
+
+          <button class="action-btn cal-btn" id="addToCalBtn">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span>Add to Calendar</span>
+          </button>
+        </div>
+
+        <!-- RSVP & WhatsApp Contact -->
+        <div class="rsvp-card">
+          <h4 class="rsvp-title">Kindly Confirm Your Presence</h4>
+          <p class="rsvp-desc">Your blessings and presence are our greatest gift.</p>
+          <a href="https://wa.me/?text=Hello%20Hariharan%20%26%20Divya%20Bharathi!%20Heartiest%20congratulations%20on%20your%20wedding%20on%2025.11.2026!%20I%20am%20delighted%20to%20attend%20the%20celebration." target="_blank" class="whatsapp-btn">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 17.03c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.164 8.164 0 0 1-1.25-4.26c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.23 8.24zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.05s.88 2.38 1 2.55c.12.17 1.73 2.64 4.19 3.7.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.18-.47-.3z"/>
+            </svg>
+            <span>RSVP on WhatsApp</span>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <footer class="app-footer">
+        <div class="footer-lotus-svg">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#D4AF37" stroke-width="1.5">
+            <path d="M12 20c-5-2-8-6-8-10 3 0 6 2 8 6 2-4 5-6 8-6 0 4-3 8-8 10z" fill="rgba(212,175,55,0.25)"/>
+            <path d="M12 20c-2-3-3-7-2-11 2 1 3 4 2 11zm0 0c2-3 3-7 2-11-2 1-3 4-2 11z"/>
+          </svg>
+        </div>
+        <p class="footer-blessing">We eagerly await your gracious presence with family & friends</p>
+        <div class="footer-heart">With Love & Gratitude</div>
+        <div class="footer-year">© 2026 Hariharan & Divya Bharathi Wedding</div>
+      </footer>
+
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
