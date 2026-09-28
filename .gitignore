@@ -4,6 +4,10 @@ node_modules/
 # Logs
 *.log
 
+# Local dev server
+server.js
+dev-server.js
+
 # OS generated files
 .DS_Store
 Thumbs.db
