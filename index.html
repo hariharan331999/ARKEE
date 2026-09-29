@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Hariharan & Divya Bharathi | Royal Wedding Invitation</title>
-  <meta name="description" content="You are cordially invited to celebrate the royal wedding of Hariharan & Divya Bharathi. Tap to open the invitation.">
+  <title>Aravind & Keerthi | Royal Wedding Invitation</title>
+  <meta name="description" content="You are cordially invited to celebrate the royal wedding of Aravind & Keerthi. Tap to open the invitation.">
   
   <!-- Google Fonts: Royal serif & calligraphy fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,11 +27,25 @@
   <main class="mobile-viewport" id="mobileApp">
 
     <!-- ============================================ -->
-    <!-- SECTION 1: VIDEO HERO WITH TAP TO OPEN -->
+    <!-- SECTION 1: VIDEO HERO WITH ROYAL CURTAIN & TAP TO OPEN -->
     <!-- ============================================ -->
     <section class="section video-section" id="heroSection">
       <div class="video-container" id="videoContainer">
-        <!-- The MP4 Video (MUTED as requested - No music/audio) -->
+        <!-- Floating Sound Control Toggle -->
+        <button class="sound-toggle-btn" id="soundToggleBtn" aria-label="Toggle Audio" title="Toggle Sound">
+          <svg class="sound-icon-on" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"/>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+          </svg>
+          <svg class="sound-icon-off hidden" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"/>
+            <line x1="23" y1="9" x2="17" y2="15"/>
+            <line x1="17" y1="9" x2="23" y2="15"/>
+          </svg>
+        </button>
+
+        <!-- The MP4 Video (Aravind weds Keerthi) -->
         <video 
           id="introVideo" 
           playsinline 
@@ -39,23 +53,18 @@
           x5-playsinline
           preload="auto"
           muted
-          src="assets/wedding_intro.mp4"
+          src="assets/Aravindwedskeerth.mp4"
         ></video>
         
         <!-- Subtle Top & Bottom Vignettes for Cinema Feel -->
         <div class="video-top-gradient"></div>
         <div class="video-bottom-gradient"></div>
 
-        <!-- Initial "Tap To Open" Overlay (Clean text only, no outer seal frame) -->
+        <!-- "Tap To Open" Overlay (Clean Glowing Text directly over video's first frame) -->
         <div class="tap-overlay" id="tapOverlay">
           <div class="tap-text-trigger" id="tapOpenBtn">
             <div class="tap-sparkle-top">✦</div>
             <h1 class="tap-main-text">TAP TO OPEN</h1>
-            <p class="tap-sub-text">ROYAL INVITATION</p>
-            <div class="tap-touch-pill">
-              <span class="touch-ring"></span>
-              <span class="touch-label">Touch Anywhere</span>
-            </div>
           </div>
         </div>
 
@@ -70,55 +79,17 @@
         </div>
       </div>
 
-      <!-- SEAMLESS TRANSITION DIVIDER: Floral garland & gold wave to hide video cutoff -->
-      <div class="seamless-divider">
-        <div class="floral-garland-wrap">
-          <svg class="floral-svg-divider" viewBox="0 0 600 70" preserveAspectRatio="none">
-            <defs>
-              <linearGradient id="goldWaveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#996515"/>
-                <stop offset="30%" stop-color="#D4AF37"/>
-                <stop offset="50%" stop-color="#FFF2A3"/>
-                <stop offset="70%" stop-color="#D4AF37"/>
-                <stop offset="100%" stop-color="#996515"/>
-              </linearGradient>
-            </defs>
-            <path d="M0,0 Q150,55 300,25 Q450,55 600,0 L600,70 L0,70 Z" fill="#140407"/>
-            <path d="M0,0 Q150,55 300,25 Q450,55 600,0" fill="none" stroke="url(#goldWaveGrad)" stroke-width="2.5"/>
-          </svg>
-          
-          <!-- Ornate Centerpiece with Diya SVG -->
-          <div class="flower-cluster-band">
-            <div class="flower-motif-svg left">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#D4AF37" stroke-width="1.5">
-                <path d="M12 2C9 7 4 9 4 12c0 4.4 3.6 8 8 8s8-3.6 8-8c0-3-5-5-8-10z" fill="rgba(212,175,55,0.2)"/>
-                <circle cx="12" cy="12" r="3" fill="#D4AF37"/>
-              </svg>
-            </div>
-            
-            <div class="flower-centerpiece">
-              <svg class="diya-flame-svg" viewBox="0 0 24 24" width="22" height="22" fill="none">
-                <path d="M12 2c-.6 2.2-2.2 3.8-2.2 5.8a2.2 2.2 0 0 0 4.4 0C14.2 5.8 12.6 4.2 12 2z" fill="#FFF2A3"/>
-                <path d="M4 14c0 4 3.6 6.5 8 6.5s8-2.5 8-6.5c0-1.5-3.6-2.5-8-2.5S4 12.5 4 14z" fill="#D4AF37"/>
-                <line x1="8" y1="20.5" x2="16" y2="20.5" stroke="#996515" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-
-            <div class="flower-motif-svg right">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#D4AF37" stroke-width="1.5">
-                <path d="M12 2C9 7 4 9 4 12c0 4.4 3.6 8 8 8s8-3.6 8-8c0-3-5-5-8-10z" fill="rgba(212,175,55,0.2)"/>
-                <circle cx="12" cy="12" r="3" fill="#D4AF37"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- ============================================ -->
     <!-- SECTION 2: ROYAL WEDDING INVITATION CARD -->
     <!-- ============================================ -->
     <section class="section invitation-section" id="invitationSection">
+      <!-- Hanging Lavender Garland at top of section -->
+      <div class="lavender-garland-wrap">
+        <img src="assets/lavenderflowers.png" alt="Lavender Floral Garland" class="lavender-garland-img">
+      </div>
+
       <div class="royal-card-wrapper">
         <div class="card-ornate-frame">
           <div class="corner-ornament top-left"></div>
@@ -138,10 +109,10 @@
             we cordially invite you and your family to celebrate the auspicious wedding of
           </div>
 
-          <!-- Couple Presentation: Hariharan & Divya Bharathi -->
+          <!-- Couple Presentation: Aravind & Keerthi -->
           <div class="couple-card">
             <div class="groom-info">
-              <h2 class="couple-name groom">Hariharan</h2>
+              <h2 class="couple-name groom">Aravind</h2>
               <div class="parents-line">S/o. Smt. & Sri. Parents Name</div>
             </div>
 
@@ -158,7 +129,7 @@
             </div>
 
             <div class="bride-info">
-              <h2 class="couple-name bride">Divya Bharathi</h2>
+              <h2 class="couple-name bride">Keerthi</h2>
               <div class="parents-line">D/o. Smt. & Sri. Parents Name</div>
             </div>
           </div>
@@ -393,7 +364,7 @@
         <div class="rsvp-card">
           <h4 class="rsvp-title">Kindly Confirm Your Presence</h4>
           <p class="rsvp-desc">Your blessings and presence are our greatest gift.</p>
-          <a href="https://wa.me/?text=Hello%20Hariharan%20%26%20Divya%20Bharathi!%20Heartiest%20congratulations%20on%20your%20wedding%20on%2025.11.2026!%20I%20am%20delighted%20to%20attend%20the%20celebration." target="_blank" class="whatsapp-btn">
+          <a href="https://wa.me/?text=Hello%20Aravind%20%26%20Keerthi!%20Heartiest%20congratulations%20on%20your%20wedding!%20I%20am%20delighted%20to%20attend%20the%20celebration." target="_blank" class="whatsapp-btn">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
               <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 17.03c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.164 8.164 0 0 1-1.25-4.26c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.23 8.24zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.05s.88 2.38 1 2.55c.12.17 1.73 2.64 4.19 3.7.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.18-.47-.3z"/>
             </svg>
@@ -413,7 +384,7 @@
         </div>
         <p class="footer-blessing">We eagerly await your gracious presence with family & friends</p>
         <div class="footer-heart">With Love & Gratitude</div>
-        <div class="footer-year">© 2026 Hariharan & Divya Bharathi Wedding</div>
+        <div class="footer-year">© 2026 Aravind & Keerthi Wedding</div>
       </footer>
 
     </section>

@@ -48,19 +48,47 @@ function unlockScroll() {
 }
 
 /* --------------------------------------------------------------------------
-   2. HERO VIDEO & TAP-TO-OPEN SYSTEM (MUTED - NO MUSIC)
+   2. HERO VIDEO & ROYAL CURTAIN TAP-TO-OPEN SYSTEM
    -------------------------------------------------------------------------- */
 function initVideoHero() {
   const introVideo = document.getElementById('introVideo');
   const tapOverlay = document.getElementById('tapOverlay');
   const tapOpenBtn = document.getElementById('tapOpenBtn');
+  const soundToggleBtn = document.getElementById('soundToggleBtn');
   const scrollPrompt = document.getElementById('scrollPrompt');
   const invitationSection = document.getElementById('invitationSection');
 
   if (!introVideo || !tapOverlay) return;
 
-  // Video is permanently muted as requested (no audio / no music)
+  // Sound toggle button setup
+  const soundIconOn = soundToggleBtn ? soundToggleBtn.querySelector('.sound-icon-on') : null;
+  const soundIconOff = soundToggleBtn ? soundToggleBtn.querySelector('.sound-icon-off') : null;
+
+  const updateSoundUI = (isMuted) => {
+    if (soundIconOn && soundIconOff) {
+      if (isMuted) {
+        soundIconOn.classList.add('hidden');
+        soundIconOff.classList.remove('hidden');
+      } else {
+        soundIconOn.classList.remove('hidden');
+        soundIconOff.classList.add('hidden');
+      }
+    }
+  };
+
+  // Initially muted for reliable autoplay policy
   introVideo.muted = true;
+  updateSoundUI(true);
+
+  if (soundToggleBtn) {
+    soundToggleBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      introVideo.muted = !introVideo.muted;
+      updateSoundUI(introVideo.muted);
+    });
+  }
+
   introVideo.pause();
   introVideo.currentTime = 0.01;
 
@@ -71,28 +99,39 @@ function initVideoHero() {
     if (hasStarted) return;
     hasStarted = true;
 
-    // Mini celebration confetti
+    // Mini celebration confetti with Lavender & Gold palette
     if (typeof confetti === 'function') {
       confetti({
-        particleCount: 45,
-        spread: 70,
+        particleCount: 55,
+        spread: 80,
         origin: { y: 0.5 },
-        colors: ['#D4AF37', '#FFF2A3', '#AA771C']
+        colors: ['#D4AF37', '#FFF2A3', '#C084FC', '#E9D5FF', '#9333EA']
       });
     }
 
-    // Fade out tap overlay
+    // Smoothly fade out "TAP TO OPEN" text
     tapOverlay.classList.add('fade-out');
 
-    // Play video in 100% silent mode
-    introVideo.muted = true;
+    // Attempt unmuted playback due to explicit user tap gesture
+    introVideo.muted = false;
     introVideo.currentTime = 0;
-    introVideo.play().catch(err => {
-      console.warn("Play attempt:", err);
-    });
+
+    const playPromise = introVideo.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          updateSoundUI(false);
+        })
+        .catch(err => {
+          console.warn("Audio autoplay blocked by browser policy, continuing muted:", err);
+          introVideo.muted = true;
+          updateSoundUI(true);
+          introVideo.play();
+        });
+    }
   };
 
-  // Allow clicking anywhere on the overlay or button
+  // Allow clicking anywhere on the overlay or trigger button to start video
   tapOverlay.addEventListener('click', startVideoPlayback);
   if (tapOpenBtn) tapOpenBtn.addEventListener('click', startVideoPlayback);
 
@@ -101,7 +140,7 @@ function initVideoHero() {
     if (hasEnded) return;
     hasEnded = true;
 
-    // Freeze video at the exact final frame showing Hariharan & Divya Bharathi
+    // Freeze video at the exact final frame showing Aravind & Keerthi
     introVideo.pause();
 
     // Unlock scrolling
@@ -116,8 +155,8 @@ function initVideoHero() {
   introVideo.addEventListener('ended', handleEnd);
 
   introVideo.addEventListener('timeupdate', () => {
-    // If within 0.15s of the video duration, freeze on final frame
-    if (introVideo.duration && introVideo.currentTime >= (introVideo.duration - 0.15)) {
+    // If within 0.25s of the video duration, freeze on final frame
+    if (introVideo.duration && introVideo.currentTime >= (introVideo.duration - 0.25)) {
       handleEnd();
     }
   });
@@ -301,7 +340,7 @@ function initScratchCard() {
         particleCount: 80,
         spread: 80,
         origin: { y: 0.6 },
-        colors: ['#D4AF37', '#FFDF73', '#FF4D6D', '#FFB703', '#FFFFFF']
+        colors: ['#D4AF37', '#FFDF73', '#C084FC', '#E9D5FF', '#9333EA', '#FFFFFF']
       });
     }
   }
@@ -415,12 +454,12 @@ function initCalendarAndActions() {
       const icsData = [
         'BEGIN:VCALENDAR',
         'VERSION:2.0',
-        'PRODID:-//Hariharan and Divya Bharathi Wedding//EN',
+        'PRODID:-//Aravind and Keerthi Wedding//EN',
         'CALSCALE:GREGORIAN',
         'METHOD:PUBLISH',
         'BEGIN:VEVENT',
-        'SUMMARY:Hariharan & Divya Bharathi Royal Wedding',
-        'DESCRIPTION:You are cordially invited to celebrate the royal wedding of Hariharan & Divya Bharathi. Subha Muhurtham: 09:15 AM - 10:30 AM.',
+        'SUMMARY:Aravind & Keerthi Royal Wedding',
+        'DESCRIPTION:You are cordially invited to celebrate the royal wedding of Aravind & Keerthi. Subha Muhurtham: 09:15 AM - 10:30 AM.',
         'LOCATION:Sri Krishna Grand Kalyana Mandapam, Chennai',
         'DTSTART:20261125T034500Z',
         'DTEND:20261125T080000Z',
@@ -432,7 +471,7 @@ function initCalendarAndActions() {
       const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
-      link.download = 'Hariharan_DivyaBharathi_Wedding.ics';
+      link.download = 'Aravind_Keerthi_Wedding.ics';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
